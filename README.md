@@ -283,16 +283,32 @@ alter table **seniority_level** modify **seniority_level_name** varchar(20);
 
 **select** * from **user_permissions**;
 
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(39).png)
+
 **select** * from **user_management**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(40).png)
 
 **select** * from **job_titles**;
 
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(43).png)
+
 **select** * from **pay_grades**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(44).png)
 
 **select** * from **employment_type**;
 
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(45).png)
+
 **select** * from **seniority_level**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(46).png)
 
 **select** * from **work_shift**;
 
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(47).png)
+
 **select** * from **work_shift_employees**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(48).png)
