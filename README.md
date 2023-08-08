@@ -312,3 +312,186 @@ alter table **seniority_level** modify **seniority_level_name** varchar(20);
 **select** * from **work_shift_employees**;
 
 ![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(48).png)
+
+## DML -- Stergerea tuturor datelor din tabela
+
+#delete from user_management;
+
+#truncate table user_management; 
+
+#truncate table job_titles;
+
+## DQL (DATA QUERY LANGUAGE) 
+
+## -- Afisarea unei sau mai multor coloane
+
+**select** username , id_role_employee from user_management;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(49).png)
+
+
+**select** employee_name from user_management;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(50).png)
+
+
+## -- Selectarea angajatilor care au status disabled 
+
+**select** * from **user_management** where **id_status** = false;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(51).png)
+
+## -- Selectarea angajatilor care au status enabled
+
+**select** * from **user_management** where **id_status** = true;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(52).png)
+
+## -- Selectarea angajatilor care au acelasi rol
+
+**select** user_management.employee_name,user_permissions.role_employee
+from **user_management** inner join **user_permissions**
+on user_management.id_role_employee = user_permissions.id
+where **role_employee = 'Admin'**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(54).png)
+
+**select** user_management.employee_name,user_permissions.role_employee
+from **user_management** inner join **user_permissions**
+on user_management.id_role_employee = user_permissions.id
+where **role_employee = 'ESS_Employee'**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(55).png)
+
+**select** user_management.employee_name,user_permissions.role_employee
+from **user_management** inner join **user_permissions**
+on user_management.id_role_employee = user_permissions.id
+where **role_employee = 'ESS_Supervisor'**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(56).png)
+
+## -- Selectare angajatilor cu numele Patrick Sharp si Peter Selling
+
+**select** * from **user_management** where **employee_name in ("Patrick Sharp")**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(57).png)
+
+**select** * from **user_management** where **employee_name in ("Peter Selling")**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(58).png)
+
+## -- Selectarea id-ului/numelui angajatilor care nu au introdus nicio data in Job description
+select job_titles.job_description,user_management.employee_name 
+from job_titles inner join user_management
+on job_titles.job_id=user_management.job_id
+where job_description is null;
+
+-- Selectarea id-ului/numelui angajatilor care au introdus date in Job description
+select * from job_titles where job_description is not null;
+select job_titles.job_description,user_management.employee_name 
+from job_titles inner join user_management
+on job_titles.job_id=user_management.job_id
+where job_description is not null;
+
+-- Filtreaza angajatii in functie de moneda salariului
+select user_management.employee_name,user_permissions.id_paygrade,pay_grades.currency
+from user_management inner join user_permissions inner join pay_grades
+on user_management.id_role_employee = user_permissions.id and user_permissions.id_paygrade = pay_grades.id_paygrade
+where currency = 'EURO';
+
+select user_management.employee_name,user_permissions.id_paygrade,pay_grades.currency
+from user_management inner join user_permissions inner join pay_grades
+on user_management.id_role_employee = user_permissions.id and user_permissions.id_paygrade = pay_grades.id_paygrade
+where currency = 'RON';
+
+select user_management.employee_name,user_permissions.id_paygrade,pay_grades.currency
+from user_management inner join user_permissions inner join pay_grades
+on user_management.id_role_employee = user_permissions.id and user_permissions.id_paygrade = pay_grades.id_paygrade
+where currency = 'USD';
+
+select user_management.employee_name,user_permissions.id_paygrade,pay_grades.currency
+from user_management inner join user_permissions inner join pay_grades
+on user_management.id_role_employee = user_permissions.id and user_permissions.id_paygrade = pay_grades.id_paygrade
+where currency = 'HUF';
+
+-- filtreaza angajatii cu salariul maxim sub 4000 euro
+select pay_grades.maximum_salary,pay_grades.currency,user_management.employee_name,user_permissions.id_paygrade
+from pay_grades inner join user_management inner join user_permissions
+on user_permissions.id_paygrade = pay_grades.id_paygrade and user_management.id_role_employee = user_permissions.id
+where maximum_salary<4000 and currency ='Euro';
+
+-- filtreaza angajatii cu salariul minim mai mare sau egal cu 2000 Ron
+select pay_grades.minimum_salary,user_management.employee_name,user_permissions.id_paygrade
+from pay_grades inner join user_management inner join user_permissions
+on user_management.id_role_employee = user_permissions.id and user_permissions.id_paygrade = pay_grades.id_paygrade
+where maximum_salary >=2000 and currency ='RON';
+
+-- filtreaza angajatii in functie de contractele lor
+select employment_type.employment_type,user_management.employee_name,job_titles.job_id
+from employment_type inner join user_management inner join job_titles
+on user_management.job_id = job_titles.job_id and employment_type.job_id = job_titles.job_id
+where employment_type in ('full-time contract');
+select employment_type.employment_type,user_management.employee_name
+from employment_type inner join user_management 
+on employment_type.job_id = user_management.job_id 
+where employment_type in ('part-time contract');
+SELECT employment_type.employment_type,user_management.employee_name
+FROM employment_type INNER JOIN user_management ON employment_type.job_id = user_management.job_id
+WHERE employment_type IN ('internship contract');
+
+
+-- filtreaza angajatii activi cu salariul maxim mai mic de 5000 euro functia de supervisor si contract full-time
+select user_management.employee_name,job_titles.job_name,employment_type.employment_type,pay_grades.currency,pay_grades.maximum_salary,user_permissions.id_paygrade
+from user_management inner join job_titles inner join employment_type inner join pay_grades inner join user_permissions
+on user_management.job_id = job_titles.job_id and employment_type.job_id = job_titles.job_id  and user_permissions.id_paygrade = pay_grades.id_paygrade 
+where maximum_salary<5000 and job_name in ('Supervisor') and employment_type in ('part-time contract');
+
+-- filtreaza angajatii cu functia de dispatcher si contract internship
+select job_titles.job_name,employment_type.employment_type
+from job_titles inner join employment_type
+on job_titles.job_id = employment_type.job_id
+where job_name in ('Dispatcher') and employment_type in ('internship contract');
+
+-- afiseaza angajatii cu functiile si contractele lor
+select user_management.employee_name,job_titles.job_name,employment_type.employment_type
+from job_titles inner join employment_type inner join user_management
+on job_titles.job_id=employment_type.job_id and job_titles.job_id = user_management.job_id;
+
+-- filtreaza angajatii activi cu salariul maxim de 3000 euro
+select pay_grades.maximum_salary, pay_grades.currency,status.status_employee,user_management.employee_name
+from pay_grades inner join status inner join user_management
+where status_employee = true and maximum_salary > 3000 and currency='EURO';
+
+-- afiseaza angajatii si turele corespondente
+select user_management.employee_name, work_shift.shift_name, work_shift_employees.id_employee
+from work_shift inner join user_management inner join work_shift_employees
+on user_management.id=work_shift_employees.id_employee and work_shift_employees.id_shift = work_shift.id;
+
+-- afiseaza angajatii cu categoria de munca
+select user_management.employee_name,seniority_level.seniority_level_name,job_titles.job_id
+from user_management inner join seniority_level inner join job_titles
+on user_management.job_id = job_titles.job_id and seniority_level.job_id = job_titles.job_id;
+
+ -- afiseaza angajatii cu tura de dimineata si afiseaza si orele de lucru si perioada in care va lucra in aceasta tura
+select user_management.employee_name,work_shift.shift_name,work_shift.start_time,work_shift.end_time,work_shift_employees.start_date,work_shift_employees.end_date
+from user_management inner join work_shift inner join work_shift_employees
+on user_management.id = work_shift_employees.id_employee and work_shift_employees.id_shift = work_shift.id
+where shift_name = 'Morning Shift';
+
+-- afiseaza angajatii cu tura de dupa amiaza si afiseaza si orele de lucru si perioada in care va lucra in aceasta tura
+select user_management.employee_name,work_shift.shift_name,work_shift.start_time,work_shift.end_time,work_shift_employees.start_date,work_shift_employees.end_date
+from user_management inner join work_shift inner join work_shift_employees
+on user_management.id = work_shift_employees.id_employee and work_shift_employees.id_shift = work_shift.id
+where shift_name = 'Afternoon Shift';
+
+-- afiseaza angajatii cu tura de noapte si afiseaza si orele de lucru si perioada in care va lucra in aceasta tura
+select user_management.employee_name,work_shift.shift_name,work_shift.start_time,work_shift.end_time,work_shift_employees.start_date,work_shift_employees.end_date
+from user_management inner join work_shift inner join work_shift_employees
+on user_management.id = work_shift_employees.id_employee and work_shift_employees.id_shift = work_shift.id
+where shift_name = 'Night Shift';
+
+-- afiseaza angajatii cu turele lor plus orele de lucru si perioada in care va lucra in aceasta tura
+select user_management.employee_name,work_shift.shift_name,work_shift.start_time,work_shift.end_time,work_shift_employees.start_date,work_shift_employees.end_date
+from user_management inner join work_shift inner join work_shift_employees
+on user_management.id = work_shift_employees.id_employee and work_shift_employees.id_shift = work_shift.id;
+
