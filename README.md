@@ -102,21 +102,35 @@ alter table **user_permissions** add foreign key (**id_paygrade**) references pa
 ## -- Descrie structura unui tabel
 desc **user_management**;
 
-![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(31).png))
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(31).png)
 
 desc **user_permissions**;
 
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(32).png)
+
 desc **job_titles**;
+
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(33).png)
 
 desc **pay_grades**;
 
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(34).png)
+
 desc **seniority_level**;
+
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(35).png)
 
 desc **work_shift**;
 
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(36).png)
+
 desc **employment_type**;
 
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(37).png)
+
 desc **work_shift_employees**;
+
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(38).png)
 
  ## -- DDL -- Modificare tipului unei coloane
 
