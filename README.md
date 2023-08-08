@@ -102,6 +102,8 @@ alter table **user_permissions** add foreign key (**id_paygrade**) references pa
 ## -- Descrie structura unui tabel
 desc **user_management**;
 
+![](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(31).png))
+
 desc **user_permissions**;
 
 desc **job_titles**;
