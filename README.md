@@ -381,17 +381,26 @@ where **role_employee = 'ESS_Supervisor'**;
 ![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(58).png)
 
 ## -- Selectarea id-ului/numelui angajatilor care nu au introdus nicio data in Job description
-select job_titles.job_description,user_management.employee_name 
-from job_titles inner join user_management
-on job_titles.job_id=user_management.job_id
-where job_description is null;
 
--- Selectarea id-ului/numelui angajatilor care au introdus date in Job description
-select * from job_titles where job_description is not null;
-select job_titles.job_description,user_management.employee_name 
-from job_titles inner join user_management
+**select** job_titles.job_description,user_management.employee_name 
+from **job_titles** inner join **user_management**
 on job_titles.job_id=user_management.job_id
-where job_description is not null;
+where **job_description is null**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(59).png)
+
+## -- Selectarea id-ului/numelui angajatilor care au introdus date in Job description
+
+**select** * from job_titles where **job_description is not null**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(60).png)
+
+**select** job_titles.job_description,user_management.employee_name 
+from **job_titles** inner join **user_management**
+on job_titles.job_id=user_management.job_id
+where **job_description is not null**;
+
+![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(61).png)
 
 -- Filtreaza angajatii in functie de moneda salariului
 select user_management.employee_name,user_permissions.id_paygrade,pay_grades.currency
