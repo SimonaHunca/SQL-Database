@@ -547,7 +547,10 @@ from **job_titles** inner join **employment_type** inner join **user_management*
 
 on job_titles.job_id=employment_type.job_id and job_titles.job_id = user_management.job_id;
 
- ????????? ![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(75).png)
+**delete** from employment_type where **id** in (8,9,7);  - stergere unor id-uri puse incorect in tabela employment_type ce ducea la dublarea unor rezultate.
+
+ 
+ ![RESULTS](https://github.com/SimonaHunca/SQL-Database/blob/main/Screenshot%20(83).png)
 
 ## -- Filtreaza angajatii activi cu salariul maxim de 3000 euro
 
